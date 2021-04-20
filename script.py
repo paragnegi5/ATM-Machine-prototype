@@ -287,3 +287,30 @@ def pin_change():
 def exit_menu():
     print("Thank you for banking with us.")
     Widget.close_all()
+
+
+
+def welcome_function():
+    print("Welcome to your bank\n")
+    i=input("Please choose from the following options:- \n1.)Open New Account \n2.)Withdraw money\n3.)Deposit money\n4.)Check balance\n5.)PIN change\n6.)Exit\n\n")
+    if int(i)==1:
+        openacc()
+    elif int(i)==2:
+        withdraw_money()
+    elif int(i)==3:
+        deposit_money()
+    elif int(i)==4:
+        check_balance()
+    elif int(i)==5:
+        pin_change()
+    elif int(i)==6:
+        exit_menu()
+
+
+
+camera=CameraStream.facing_user(audio=False)
+image_recorder=ImageRecorder(stream=camera,filename='test', format='png')
+image_recorder.recording=True
+sleep(3)
+
+welcome_function()
