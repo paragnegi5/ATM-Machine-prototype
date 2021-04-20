@@ -19,12 +19,12 @@ def email_to_send(to_address,text_to_send,subject_of_mail,img=None):
     to_addr=to_address
     
 
-    username = #'enter your email username'
+    username = #'enter your email +'
     password = #"Enter yout email password and turn on access for less secure app access"
     
     msg = MIMEMultipart()
 
-    msg['From'] = 'parag.negi001@gmail.com'
+    msg['From'] = #'enter your email'
     msg['To'] = to_address
     msg['Subject'] = subject_of_mail
     html = "<html><head></head><body>"+text_to_send+"</body></html>"
