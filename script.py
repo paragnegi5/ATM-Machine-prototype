@@ -1,12 +1,12 @@
+
+import cv2
 from random import randint
 from getpass import getpass
 from time import sleep
-from ipywidgets import Widget
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
-from ipywebrtc import CameraStream,ImageRecorder
 members={}
 
 
@@ -15,16 +15,16 @@ members={}
 def email_to_send(to_address,text_to_send,subject_of_mail,img=None):
 
     
-    from_addr=#"enter your own email id"
+    from_addr=#"Enter your own email id"
     to_addr=to_address
     
 
-    username = #'enter your email +'
+    username = #'Enter your email'
     password = #"Enter yout email password and turn on access for less secure app access"
     
     msg = MIMEMultipart()
 
-    msg['From'] = #'enter your email'
+    msg['From'] = 'parag.negi001@gmail.com'
     msg['To'] = to_address
     msg['Subject'] = subject_of_mail
     html = "<html><head></head><body>"+text_to_send+"</body></html>"
@@ -64,7 +64,7 @@ def openacc():
     members[account_number].append(pin)
     members[account_number].append(email)
     print("Your new account number is: "+account_number)
-    deposit_money=input("Do yo want to deposit money in your account: ").upper()
+    deposit_money=input("Do you want to deposit money in your account (Yes/No): ").upper()
     to=email
     text="Hi..<br></br><br></br>Mr. <b>{}</b>.<br></br><br></br>Congratulations! Thank you for trusting us.<br></br><br></br>Your new account has been created with acccount number {}<br></br><br></br>Wish you a great BANKING ahead.".format(name,account_number)
     subject="New account opened"
@@ -123,11 +123,9 @@ def withdraw_money():
         else:
             print("Invalid PIN")
             to=members[account_number][2]
-            image_recorder.save()
-            Widget.close_all()
             subject="Unknown Access"
             text="Someone is trying to access your account"
-            email_to_send(to,text,subject,"test.png")
+            email_to_send(to,text,subject,img_name)
     else:
         print("Invalid account number")
         j=input("Press 0 for menu and 1 to exit: ")
@@ -165,11 +163,9 @@ def deposit_money():
         else:
             print("Invalid PIN")
             to=members[account_number][2]
-            image_recorder.save()
-            Widget.close_all()
             subject="Unknown Access"
             text="Someone is trying to access your account"
-            email_to_send(to,text,subject,"test.png")
+            email_to_send(to,text,subject,img_name)
     else:
         print("Invalid account number")
         j=input("Press 0 for menu and 1 to exit: ")
@@ -202,11 +198,9 @@ def check_balance():
             print("Invalid PIN")
             image_save(image_recorder)
             to=members[account_number][2]
-            image_recorder.save()
-            Widget.close_all()
             subject="Unknown Access"
             text="Someone is trying to access your account"
-            email_to_send(to,text,subject,"test.png")
+            email_to_send(to,text,subject,img_name)
     else:
         print("Invalid account number")
         j=input("Press 0 for menu and 1 to exit: ")
@@ -264,13 +258,11 @@ def pin_change():
                 print("Invalid option. Thank you for banking with us.")
                     
         else:
-            print("Invlaid PIN")
+            print("Invalid PIN")
             to=members[account_number][2]
-            image_recorder.save()
-            Widget.close_all()
             subject="Unknown Access"
             text="Someone is trying to access your account"
-            email_to_send(to,text,subject,"test.png")
+            email_to_send(to,text,subject,img_name)
     else:
         print("Invalid account number")
         j=input("Press 0 for menu and 1 to exit: ")
@@ -286,7 +278,6 @@ def pin_change():
 #exit menu
 def exit_menu():
     print("Thank you for banking with us.")
-    Widget.close_all()
 
 
 
@@ -305,12 +296,23 @@ def welcome_function():
         pin_change()
     elif int(i)==6:
         exit_menu()
+    else:
+        print("Invalid Option")
 
 
 
-camera=CameraStream.facing_user(audio=False)
-image_recorder=ImageRecorder(stream=camera,filename='test', format='png')
-image_recorder.recording=True
+cam = cv2.VideoCapture(0)
+cv2.namedWindow("test")
+
+
+ret, frame = cam.read()
+cv2.imshow("test", frame)
+img_name = "test.png"
+cv2.imwrite(img_name, frame)
+
+cam.release()
+
+cv2.destroyAllWindows()
 sleep(3)
 
 welcome_function()
