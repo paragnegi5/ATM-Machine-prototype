@@ -24,7 +24,7 @@ def email_to_send(to_address,text_to_send,subject_of_mail,img=None):
     
     msg = MIMEMultipart()
 
-    msg['From'] = 'parag.negi001@gmail.com'
+    msg['From'] =#'Enter your email'
     msg['To'] = to_address
     msg['Subject'] = subject_of_mail
     html = "<html><head></head><body>"+text_to_send+"</body></html>"
